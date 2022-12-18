@@ -229,6 +229,8 @@ param(
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
 	    $client.ValidateAnyCertificate = $true
         $client.SslBuffering = "On"
+
+        if(!($client.FileExists("${ftpdirectory}\$ftpfilename"))){
         if ($binary)
         {
             $dataType = "Binary"
@@ -281,6 +283,10 @@ param(
             # Disconnect, clean up
             $client.Disconnect()
         }    
+        } else {
+            Write-Output "File $FtpFileName already exists on the remote server."
+        }
+        
     }
     catch [Exception]
     {
