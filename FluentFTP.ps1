@@ -542,9 +542,9 @@ param(
         Write-Output "Directory $ftpdirectory already exists"
         }
         if($overwrite -eq "y"){
-                Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
-                $client.deleteDirectory($ftpdirectory)
+                $client.DeleteDirectory($ftpdirectory)
                 $client.CreateDirectory($ftpdirectory)
+                Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
         }
     }
 
