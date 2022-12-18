@@ -492,14 +492,14 @@ param(
   Password associated with FTP site.
 
  .Parameter FtpDirectory
-  The Directory on FTP server
+  The Directory on FTP server that needs to be created
   
-  .Parameter fileName
-  Filename to transfer
+  .Parameter overwrite
+  Either yes or no to overwrite the directory "n" by default.
   
  .Example
    # Copy a file or group of fles to an FTP folder.
-   Send-FtpFile -Site ftp.site.com -User bob -Password secure -FtpDirectory pub -fileName "Read*"
+   Send-FtpFile -Site ftp.site.com -User bob -Password secure -FtpDirectory pub
 
 #>
 function Create-FtpDir {
@@ -533,11 +533,10 @@ param(
         }
         else {
         Write-Output "Directory $ftpdirectory already exists"
-            if($overwrite -eq "y"){
-                $client.createDirectory($ftpdirectory)
+        }
+        if($overwrite -eq "y"){
                 Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
-            }
-
+                $client.createDirectory($ftpdirectory)
         }
     }
 
