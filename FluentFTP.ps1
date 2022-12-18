@@ -242,7 +242,7 @@ param(
         $client.UploadDatatype = $dataType
         $client.AutoConnect()
 
-        if(!($client.FileExists("${ftpdirectory}\$ftpfilename"))){
+
         if ($FtpFileName -notlike "*\*" )
         {
             $FtpFileName = Join-path $pwd $FtpFileName
@@ -283,11 +283,7 @@ param(
         {
             # Disconnect, clean up
             $client.Disconnect()
-        }    
-        } else {
-            Write-Output "File $FtpFileName already exists on the remote server."
-        }
-        
+        }           
     }
     catch [Exception]
     {
