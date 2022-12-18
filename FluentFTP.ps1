@@ -44,8 +44,9 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-        $client.AutoConnect()
 	$client.ValidateAnyCertificate = $true
+        $client.AutoConnect()
+
 		if ($ftpDirectory -ne "")
 		{
 			$client.SetWorkingDirectory($ftpDirectory)
@@ -130,8 +131,8 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-        $client.AutoConnect()
 	$client.ValidateAnyCertificate = $true
+        $client.AutoConnect()
         try
         {
             if ($ftpDirectory -ne "")
@@ -333,6 +334,7 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
+	$client.ValidateAnyCertificate = $true
         if ($binary)
         {
             $dataType = "Binary"
@@ -344,7 +346,6 @@ param(
             
         $client.DownloadDatatype = $dataType
         $client.AutoConnect()
-	$client.ValidateAnyCertificate = $true
         try
         {
             if ($ftpdirectory -ne "")
@@ -436,8 +437,9 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-        $client.AutoConnect()
 	$client.ValidateAnyCertificate = $true
+        $client.AutoConnect()
+
         try
         {
             if ($ftpDirectory -ne "")
