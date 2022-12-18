@@ -528,7 +528,7 @@ param(
 
         try{
         if(!($client.DirectoryExists($ftpdirectory))){
-        $client.createDirectory($ftpdirectory)
+        $client.CreateDirectory($ftpdirectory)
         Write-Output "Directory $ftpdirectory successfully created"
         }
         else {
@@ -536,8 +536,8 @@ param(
         }
         if($overwrite -eq "y"){
                 Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
-                $client.emptyDirectory($ftpdirectory)
-                $client.createDirectory($ftpdirectory)
+                $client.EmptyDirectory($ftpdirectory)
+                $client.CreateDirectory($ftpdirectory)
         }
     }
 
