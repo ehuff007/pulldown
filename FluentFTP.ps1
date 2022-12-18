@@ -44,7 +44,8 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-	$client.ValidateAnyCertificate = $true
+	    $client.ValidateAnyCertificate = $true
+        $client.SslBuffering = "On"
         $client.AutoConnect()
 
 		if ($ftpDirectory -ne "")
@@ -131,7 +132,8 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-	$client.ValidateAnyCertificate = $true
+	    $client.ValidateAnyCertificate = $true
+        $client.SslBuffering = "On"
         $client.AutoConnect()
         try
         {
@@ -225,7 +227,8 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-	$client.ValidateAnyCertificate = $true
+	    $client.ValidateAnyCertificate = $true
+        $client.SslBuffering = "On"
         if ($binary)
         {
             $dataType = "Binary"
@@ -334,7 +337,8 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-	$client.ValidateAnyCertificate = $true
+        $client.SslBuffering = "On"
+	    $client.ValidateAnyCertificate = $true
         if ($binary)
         {
             $dataType = "Binary"
@@ -437,7 +441,8 @@ param(
         # Setup session options
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
-	$client.ValidateAnyCertificate = $true
+	    $client.ValidateAnyCertificate = $true
+        $client.SslBuffering = "On"
         $client.AutoConnect()
 
         try
@@ -525,6 +530,7 @@ param(
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
 	    $client.ValidateAnyCertificate = $true
         $client.AutoConnect()
+        $client.SslBuffering = "On"
 
         try{
         if(!($client.DirectoryExists($ftpdirectory))){
