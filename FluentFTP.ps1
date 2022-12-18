@@ -526,6 +526,7 @@ param(
 	    $client.ValidateAnyCertificate = $true
         $client.AutoConnect()
 
+        try{
         if(!($client.DirectoryExists($ftpdirectory))){
         $client.createDirectory($ftpdirectory)
         Write-Output "Directory $ftpdirectory successfully created"
@@ -538,6 +539,7 @@ param(
             }
 
         }
+    }
 
         finally
         {
