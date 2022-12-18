@@ -230,7 +230,6 @@ param(
 	    $client.ValidateAnyCertificate = $true
         $client.SslBuffering = "On"
 
-        if(!($client.FileExists("${ftpdirectory}\$ftpfilename"))){
         if ($binary)
         {
             $dataType = "Binary"
@@ -242,6 +241,8 @@ param(
             
         $client.UploadDatatype = $dataType
         $client.AutoConnect()
+
+        if(!($client.FileExists("${ftpdirectory}\$ftpfilename"))){
         if ($FtpFileName -notlike "*\*" )
         {
             $FtpFileName = Join-path $pwd $FtpFileName
