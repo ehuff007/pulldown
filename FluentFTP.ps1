@@ -516,8 +516,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string] $password,
     [Parameter(Mandatory=$true)]
-    [string] $ftpdirectory,
-    [string] $overwrite = "n"
+    [string] $ftpdirectory
     )
 
     try
@@ -540,11 +539,6 @@ param(
         }
         else {
         Write-Output "Directory $ftpdirectory already exists"
-        }
-        if($overwrite -eq "y"){
-                $client.DeleteDirectory($ftpdirectory)
-                $client.CreateDirectory($ftpdirectory)
-                Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
         }
     }
 
