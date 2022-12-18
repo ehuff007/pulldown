@@ -536,6 +536,7 @@ param(
         }
         if($overwrite -eq "y"){
                 Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
+                $client.emptyDirectory($ftpdirectory)
                 $client.createDirectory($ftpdirectory)
         }
     }
