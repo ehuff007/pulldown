@@ -474,3 +474,80 @@ param(
       
     }
 }
+
+<#
+ .Synopsis
+  Copy a file to an FTP folder.
+
+ .Description
+  Copy a file to an FTP folder.
+
+ .Parameter Site
+  The site to connect to.
+
+ .Parameter User
+  The user name.
+
+ .Parameter Password
+  Password associated with FTP site.
+
+ .Parameter FtpDirectory
+  The Directory on FTP server
+  
+  .Parameter fileName
+  Filename to transfer
+  
+ .Example
+   # Copy a file or group of fles to an FTP folder.
+   Send-FtpFile -Site ftp.site.com -User bob -Password secure -FtpDirectory pub -fileName "Read*"
+
+#>
+function Create-FtpDir {
+param(
+    [Parameter(Mandatory=$true)]
+    [string] $site,
+    [Parameter(Mandatory=$true)]
+    [string] $user,
+    [Parameter(Mandatory=$true)]
+    [string] $password,
+    [Parameter(Mandatory=$true)]
+    [string] $ftpdirectory,
+    [string] $overwrite = "n"
+    )
+
+    try
+    {
+        
+        # Load FluentFTP .NET assembly
+        Add-Type -Path "$PSScriptRoot\FluentFTP.dll"
+        # Setup session options
+        $client = New-Object FluentFTP.FtpClient($site)
+        $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
+	    $client.ValidateAnyCertificate = $true
+        $client.AutoConnect()
+
+        if(!($client.DirectoryExists($ftpdirectory))){
+        $client.createDirectory($ftpdirectory)
+        Write-Output "Directory $ftpdirectory successfully created"
+        }
+        else {
+        Write-Output "Directory $ftpdirectory already exists"
+            if($overwrite = "y"){
+                $client.createDirectory($ftpdirectory)
+                Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
+            }
+
+        }
+
+        finally
+        {
+            # Disconnect, clean up
+            $client.Disconnect()
+        }    
+    }
+    catch [Exception]
+    {
+      echo $_.Exception|format-list -force
+      
+    }
+}
