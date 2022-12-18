@@ -529,8 +529,9 @@ param(
         $client = New-Object FluentFTP.FtpClient($site)
         $client.Credentials = New-Object System.Net.NetworkCredential($user, $password)
 	    $client.ValidateAnyCertificate = $true
-        $client.AutoConnect()
         $client.SslBuffering = "On"
+        $client.AutoConnect()
+   
 
         try{
         if(!($client.DirectoryExists($ftpdirectory))){
