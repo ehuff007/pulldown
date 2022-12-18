@@ -543,7 +543,7 @@ param(
         }
         if($overwrite -eq "y"){
                 Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
-                $client.EmptyDirectory($ftpdirectory)
+                $client.deleteDirectory($ftpdirectory)
                 $client.CreateDirectory($ftpdirectory)
         }
     }
