@@ -533,7 +533,7 @@ param(
         }
         else {
         Write-Output "Directory $ftpdirectory already exists"
-            if($overwrite = "y"){
+            if($overwrite -eq "y"){
                 $client.createDirectory($ftpdirectory)
                 Write-Output "Overwrite mode was enabled. Directory $ftpdirectory was overwritten"
             }
