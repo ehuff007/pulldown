@@ -329,6 +329,8 @@ param(
     [string] $ftpDirectory = "",
     [Parameter(Mandatory=$true)]
     [string] $ftpFileName,
+    [Parameter(Mandatory=$true)]
+    [string] $localPath,
     [switch] $binary = $false
     )
 
@@ -365,17 +367,16 @@ param(
             foreach ($item in $client.GetListing(""))
             {
                 $fileonly = $item.Name
-                $localFile = Join-path $pwd $fileOnly
                 if ($item.Name -like $ftpFileName)
 				{
-					if ($client.DownloadFile($localFile, $fileOnly))
+					if ($client.DownloadFile($localPath, $fileOnly))
 					{
                         $filesDownloaded = $true
-						Write-Output ("$fileOnly successfully downloaded to $localFile" )
+						Write-Output ("$fileOnly successfully downloaded to $localPath" )
 					}
 					else
 					{
-						Write-Output ("Unable to download $fileOnly to $localFile" )
+						Write-Output ("Unable to download $fileOnly to $localPath" )
 					}
 				}
             }
